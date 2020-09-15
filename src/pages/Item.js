@@ -18,6 +18,7 @@ class Item extends React.Component {
     }
 
     componentDidMount () {
+        window.scrollTo(0,0);
         this.getItem();
     }
 
@@ -127,7 +128,7 @@ class Item extends React.Component {
                 </div>
             )
         } else {
-            return <div className='loading'><div className='loader'></div></div>
+            return <div className='loading'><div className='loader-container'><div className='loader'></div></div></div>
         }
     }
 }

@@ -10,8 +10,8 @@ class Search extends React.Component {
                 <div className='search-container'>
                     <div className='search-header'>
                         <div style={{display:'flex'}}>
-                            <div className='search-icon'/>
-                            <div className='search-close-icon' onClick={this.props.closeSearch}/>
+                            <p className='search-icon'>QUERY</p>
+                            <p className='search-close-icon' onClick={this.props.closeSearch}>X</p>
                         </div>
                         <input id='search-input' type='text' onChange={(e) => {this.props.updateQ(e)}}/>
                     </div>

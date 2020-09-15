@@ -3,34 +3,40 @@
 }
 
 .loading {
-  width: 100%;
+  box-sizing: border-box;
+  width: 100vw;
   height: 100vh;
   position: relative;
+  display: flex;
 
-  .loader {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    border: 16px solid #F8F9FB;
-    border-radius: 50%;
-    border-top: 16px solid #eee;
-    box-shadow: 0 0 10px #ddd;
-    width: 80px;
-    height: 80px;
-    -webkit-animation: spin 1s linear infinite; /* Safari */
-    animation: spin 1s linear infinite;
-  }
-  
-  /* Safari */
-  @-webkit-keyframes spin {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  .loader-container {
+    margin: auto;
+    align-items: center;
+    justify-items: center;
+    margin: auto;
+
+
+    .loader {
+      border: 16px solid #F8F9FB;
+      border-radius: 50%;
+      border-top: 16px solid #eee;
+      box-shadow: 0 0 10px #ddd;
+      width: 60px;
+      height: 60px;
+      -webkit-animation: spin 1s linear infinite; /* Safari */
+      animation: spin 1s linear infinite;
+    }
+    
+    /* Safari */
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   }
 }
 
@@ -54,7 +60,7 @@
   background-color: rgba(0,0,0,0.5);
 
   .search-container {
-    padding: 100px 40px 40px 40px;
+    padding: 60px 40px 40px 40px;
     background-color: white;
     margin: auto;
     border-bottom-right-radius: 5px;
@@ -63,19 +69,21 @@
     .search-header {
       
       .search-icon, .search-close-icon {
-        width: 30px;
-        height: 30px;
-        background-size: cover;
-        margin: 10px;
+        border: none;
+        padding: 20px 30px;
+        background-color: #F8F9FB;
+        border: 2px solid white;
+        box-shadow: 0 0 10px #ddd;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 5px;
         cursor: pointer;
-      }
+        outline: none;
+        margin-right: 20px;
 
-      .search-icon {
-        background-image: url('./assets/icons/search.svg');
-      }
-
-      .search-close-icon {
-        background-image: url('./assets/icons/minus.svg');
+        &:hover {
+          background-color: #eee;
+        }
       }
 
       input {
@@ -136,15 +144,18 @@
   position: fixed;
   z-index: 1;
   right: 0;
-  padding: 100px 40px 40px 40px;
+  padding: 80px 40px 40px 40px;
   background-color: #F8F9FB;
   height: 100vh;
 
   p {
     font-weight: bold;
+    text-align: left;
+    margin: 0 0 5px 0;
   }
 
   .img-container {
+    margin-top: 20px;
     img {
       width: 100%;
       height: 100%;
@@ -163,8 +174,12 @@
     border-radius: 5px;
     cursor: pointer;
     outline: none;
-    width: 100%;
+    flex: 1;
     margin-top: 20px;
+
+    &:hover {
+      background-color: #eee;
+    }
   }
 }
 

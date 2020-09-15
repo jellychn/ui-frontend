@@ -24,6 +24,7 @@ class Display extends React.Component {
     }
 
     componentDidMount () {
+        window.scrollTo(0,0);
         this.getItems();
     }
 
@@ -96,7 +97,7 @@ class Display extends React.Component {
                 </div>
             )
         } else {
-            return <div className='loading'><div className='loader'></div></div>
+            return <div className='loading'><div className='loader-container'><div className='loader'></div></div></div>
         }
     }
 }

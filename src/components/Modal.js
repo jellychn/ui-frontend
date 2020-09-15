@@ -9,15 +9,17 @@ class Modal extends React.Component {
         if (this.props.item !== null) {
             return (
                 <div id='modal' style={{display: this.props.modal ? 'block':'none'}}>
-                    <p>{this.props.msg.toUpperCase()}</p>
+                    <p style={{fontSize: '12px'}}>{this.props.msg.toUpperCase()}</p>
                     <p>{this.props.item.name.toUpperCase()}</p>
                     <div className='img-container'>
                         <img src={this.props.item.colors[this.props.item.color]} alt={this.props.item.name}/>
                     </div>
-                    <Link to='/cart'>
-                        <button onClick={this.props.closeModal}>VIEW CART</button>
-                    </Link>
-                    <button onClick={this.props.closeModal}>CLOSE</button>
+                    <div style={{display:'flex'}}>
+                        <Link to='/cart'>
+                            <button onClick={this.props.closeModal} style={{marginRight:'20px'}}>VIEW CART</button>
+                        </Link>
+                        <button onClick={this.props.closeModal}>CLOSE</button>
+                    </div>
                 </div>
             )
         } else {
