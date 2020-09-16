@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import { connect } from 'react-redux';
 import { checkCartHasItems } from './actions/cartActions';
+import { getItems, triggerGetItems } from './actions/filterActions';
 import {
   Switch,
   Route
@@ -20,10 +21,18 @@ import Item from './pages/Item';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 
+
 class App extends React.Component {
   componentDidMount () {
     window.scrollTo(0,0);
-    checkCartHasItems();
+    this.props.checkCartHasItems();
+  }
+
+  componentDidUpdate () {
+    if (this.props.requestItems) {
+      this.props.triggerGetItems(false);
+      this.props.getItems();
+    }
   }
 
   render () {
@@ -58,10 +67,18 @@ class App extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    checkCartHasItems: () => dispatch(checkCartHasItems())
+    requestItems: state.filter.requestItems
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    checkCartHasItems: () => dispatch(checkCartHasItems()),
+    triggerGetItems: (bol) => dispatch(triggerGetItems(bol)),
+    getItems: () => dispatch(getItems())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

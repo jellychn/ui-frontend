@@ -15,6 +15,6 @@ export const closeSearch = () => {
 export const updateQ = (q) => {
     return {
         type: UPDATE_Q,
-        q: q.target.value
+        q: q
     }
 }

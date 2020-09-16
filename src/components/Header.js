@@ -6,13 +6,15 @@ import menu_icon from '../assets/icons/menu.svg';
 import menu_focus_icon from '../assets/icons/menu-focus.svg';
 import search_icon from '../assets/icons/search.svg';
 import cart_icon from '../assets/icons/cart.svg';
+import display_icon from '../assets/icons/display.svg';
 // import profile_icon from '../assets/icons/profile.png';
 
 import { toggleDisplayMenu, closeDisplayMenu } from '../actions/headerActions';
 import { resetFilter } from '../actions/filterActions';
 import { checkCartHasItems } from '../actions/cartActions';
 import { closeModal } from '../actions/modalActions';
-import { openSearch } from '../actions/searchActions';
+import { openSearch, updateQ } from '../actions/searchActions';
+import { triggerGetItems } from '../actions/filterActions';
 
 class Header extends React.Component {
     componentDidUpdate(prevProps) {
@@ -25,6 +27,10 @@ class Header extends React.Component {
     checkDisplayPage = () => {
         if (window.location.pathname.split('/')[1] === 'display') {
             return <div className='logo' style={{backgroundImage: this.props.displayMenu ? `url(${menu_focus_icon})`:`url(${menu_icon})`, display: this.props.search ? 'none':'block'}} onClick={this.props.toggleDisplayMenu}/>
+        } else {
+            if (window.location.pathname.split('/')[1] !== '' && window.location.pathname.split('/')[1] !== 'checkout') {
+                return <Link to='/display'><div className='logo' style={{backgroundImage: `url(${display_icon})`, display: this.props.search ? 'none':'block'}} onClick={this.props.resetFilter}/></Link>
+            }
         }
     }
 
@@ -36,7 +42,7 @@ class Header extends React.Component {
                     <Link to='/cart'>
                         <div style={{position: 'relative', display: this.props.search ? 'none':'block'}}>
                             <div className='cart-indicator' style={{display: this.props.cartHasItems ? 'block':'none'}}/>
-                            <div className='logo' style={{backgroundImage:`url(${cart_icon})`}} onClick={() => {this.props.closeDisplayMenu(); this.props.resetFilter();this.props.closeModal()}}/>
+                            <div className='logo' style={{backgroundImage:`url(${cart_icon})`}} onClick={() => {this.props.closeDisplayMenu();this.props.closeModal();this.props.updateQ('');this.props.resetFilter()}}/>
                         </div>
                     </Link>
                     {/* <div className='logo' style={{backgroundImage:`url(${profile_icon})`}}/> */}
@@ -49,7 +55,7 @@ class Header extends React.Component {
         return (
             <div id='header'>
                 <Link to='/'>
-                    <div className='logo' style={{backgroundImage:`url(${logo_icon})`, display: this.props.search ? 'none':'block'}} onClick={() => {this.props.closeDisplayMenu();this.props.closeModal()}}/>
+                    <div className='logo' style={{backgroundImage:`url(${logo_icon})`, display: this.props.search ? 'none':'block'}} onClick={() => {this.props.closeDisplayMenu();this.props.closeModal();this.props.updateQ('');this.props.resetFilter()}}/>
                 </Link>
                 {this.checkDisplayPage()}
                 {this.checkCheckoutPage()}
@@ -73,7 +79,9 @@ const mapDispatchToProps = (dispatch) => {
         resetFilter: () => dispatch(resetFilter()),
         checkCartHasItems: () => dispatch(checkCartHasItems()),
         closeModal: () => dispatch(closeModal()),
-        openSearch: () => dispatch(openSearch())
+        openSearch: () => dispatch(openSearch()),
+        updateQ: (q) => dispatch(updateQ(q)),
+        triggerGetItems: (bol) => dispatch(triggerGetItems(bol))
     }
 }
 

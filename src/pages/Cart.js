@@ -43,6 +43,16 @@ class Cart extends React.Component {
         }
     }
 
+    checkHasItems = () => {
+        if (this.state.data.length > 0) {
+            return (
+                <Link to='/checkout'>
+                    <button>CHECKOUT</button>
+                </Link>
+            )
+        }
+    }
+
     render () {
         const cartItems = this.state.data.map((item, index) => {
             return (
@@ -79,9 +89,7 @@ class Cart extends React.Component {
                         <p>{`SUBTOTAL $${this.state.subtotal}`}</p>
                         <p>{`ESTIMATED DELIVERY $${this.state.delivery}`}</p>
                         <h1>{`TOTAL $${this.state.total}`}</h1>
-                        <Link to='/checkout'>
-                            <button>CHECKOUT</button>
-                        </Link>
+                        {this.checkHasItems()}
                     </div>
                 </div>
             )
