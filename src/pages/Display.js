@@ -56,14 +56,25 @@ class Display extends React.Component {
             });
         }
         if (this.props.data.length > 0) {
-            return (
-                <div id='display' style={{padding: this.props.displayMenu ? '100px 80px 40px 450px':'100px 80px 40px 80px'}}>
-                    <h2>{`${this.props.gender.toUpperCase()} / ${this.props.category.toUpperCase()}  [ ${this.props.filter.toUpperCase()} ] : ${this.props.q.toUpperCase()}`}</h2>
-                    <div className='items-container'>
-                        {items}
+            if (window.innerWidth < 1200) {
+                return (
+                    <div id='display' style={{padding: this.props.displayMenu ? '100px 40px 40px 40px':'100px 40px 40px 40px'}}>
+                        <h2>{`${this.props.gender.toUpperCase()} / ${this.props.category.toUpperCase()}  [ ${this.props.filter.toUpperCase()} ] : ${this.props.q.toUpperCase()}`}</h2>
+                        <div className='items-container'>
+                            {items}
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            } else {
+                return (
+                    <div id='display' style={{padding: this.props.displayMenu ? '100px 80px 40px 450px':'100px 80px 40px 80px'}}>
+                        <h2>{`${this.props.gender.toUpperCase()} / ${this.props.category.toUpperCase()}  [ ${this.props.filter.toUpperCase()} ] : ${this.props.q.toUpperCase()}`}</h2>
+                        <div className='items-container'>
+                            {items}
+                        </div>
+                    </div>
+                )
+            }
         } else {
             return <div className='filler' style={{padding: this.props.displayMenu ? '100px 80px 40px 450px':'100px 80px 40px 80px'}}><h2>{`NO ITEMS FOUND FOR QUERY: ${this.props.gender.toUpperCase()} / ${this.props.category.toUpperCase()}  [ ${this.props.filter.toUpperCase()} ] : ${this.props.q.toUpperCase()}`}</h2></div>
         }
